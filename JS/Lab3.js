@@ -95,6 +95,10 @@ function auto(modelo, matricula){
     }
 }
 
+
+document.write("<br><br><b>Ejercicio 6</b><br>");
+document.write("<p>Crear un programa en donde puedas dar de alta el modelo y matricula de un automovil, ademas de que puedas elegir encender o dejar apagado el carro, y si lo enciendes tener la opción de apagarlo</p>");
+
 modeloAuto = prompt("Modelo del auto");
 matriculaAuto = prompt("Matricula del auto");
 
@@ -109,6 +113,7 @@ if (respuesta === true){
 } else {
     auto.apagar;
 }
+
         
 
 
