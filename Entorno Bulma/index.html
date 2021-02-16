@@ -9,20 +9,79 @@
 </head>
 
 <body>
-   <div class="level is-mobile">
-       <div class="level-right">
-           <h1 class="title has-background-warning">Bulma left</h1>
-       </div>
+  
+   <div class="hero is-dark is-fullheight">
+      <div class="hero-head is-flex-mobile">
+          
+              <div class="level is-flex-mobile">
+                  <div class="level-left is-flex-mobile">
+                      <h3 class="title">NATGAS</h3>
+                      <h3 class="title has-text-success" >IT</h3>
+                  </div>
+                  <div class="level-right">
+                      <h3 class="title"><span>YOU</span><span>TUBE</span></h3>
+                  </div>
+              
+              
+              
+          </div>
+      </div>
+      
+      <div class="hero-body has-text-centered">
+          
+          <div>
+              <div class="title">
+                  Aprendiendo a usar bulma
+              </div>
+              <p class="content">
+                  La paradoja de los números interesantes, que se sirve de algunas propiedades matemáticas pero que puede catalogarse más adecuadamente como humorística, busca demostrar que todos los números naturales (1,2,3......etc) son "interesantes".
+              </p>
+          </div>   
+              
+      </div>
        
-       <div class="level-left">
-           <h1 class="title has-background-info">Bulma right</h1>
-       </div>
-       
-       <div class="level-left">
-           <h1 class="title has-background-info">Bulma right</h1>
-       </div>
    </div>
 
+   <style>
+       
+       .level {
+           padding: : 1.5rem;
+           
+       }
+       
+       .hero-head .level .level-left .title:last-child{
+           padding-left: 1.5rem;
+       }
+       
+       .level .level-right span:first-child{
+           color: #ff0000;
+       }
+       @media screen and (max-width: 768px){
+           .level {
+               flex-direction: column;
+               justify-content: space-around;
+           }
+           
+           .hero-head .level .level-left .title:first-child{
+               margin-bottom: 0;
+           }
+           
+           .hero-head{
+               justify-content: center;
+               flex-grow: 1;
+           }
+           
+           .hero-body{
+               align-items: flex-start;
+           }
+           
+           .hero.is-fullheight .hero-body{
+               align-items: flex-start;
+           }
+           
+       }
+   </style>
+   
    <script
    defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js">
    </script>
