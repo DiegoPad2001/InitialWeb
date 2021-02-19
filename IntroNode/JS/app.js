@@ -43,8 +43,7 @@ const server = http.createServer( (request, response) => {
     console.log(request.url);
     response.setHeader('Content-Type', 'text/html');
     response.write("<html>");
-    response.write("<head><title>Servidor node</title></head>");
-    response.write("<body><h1>Hola desde el servidor</h1></body>");
+    response.write("<main> <section> </section> <section> <h2>Git</h2> <p> Comandos de git para actualizar el repositorio: </p> <ol> <li><strong>git add -A</strong>: Sirve para rastrear los archivos y agregar los cambios la transacción.</li> <li><strong>git commit -m 'mensaje corto y descriptivo del cambio'</strong>: Sirve para completar la transacción y guardar los cambios de manera local.</li> <li><strong>git push</strong>: Sirve para 'empujar' todas las transacciones del repositorio local al repositorio remoto.</li> </ol> <p>Entonces, cada vez que trabajemos, debemos escribir en la consola:</p> <code><pre>git add -A git commit -m 'mensaje corto y descriptivo del cambio' git push</pre></code> </section> </main>");
     response.write("</html>");
     response.end();
 });
