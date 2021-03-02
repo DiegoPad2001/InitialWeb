@@ -14,7 +14,7 @@ const requestHandler = (request, response) => {
     } else if (request.url === "/mensaje" && request.method === "GET") {
         response.setHeader('Content-Type', 'text/html');
         response.write("<html>");
-        response.write('<head><meta charset="UTF-8"><title>Mensaje super importante</title></head>');
+        response.write('<head><meta charset="UTF-8"><title>Mensaje</title></head>');
         response.write("<body><h1>Ingresa el dato que deseas guardar dentro del sistema</h1>");
         response.write('<form action="mensaje" method="POST"><input type="text" name="mensaje"><input type="submit" value="Guardar"></form>');
         response.write("</body>");
