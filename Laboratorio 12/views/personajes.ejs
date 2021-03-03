@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="CSS/materialize.css"  media="screen,projection"/>
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    
+</head>
+<body>
+    <nav>
+        <div class="blue darken-4 nav-wrapper">
+        <a href="#" class="brand-logo">Legend of zelda</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="paginahtml">Pagina de preguntas</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Personajes</h1>
+        <ul>
+            <% for (let personaje of lista_personajes) { %>
+                <li> <%= personaje %> </li>
+            <% } %>
+        </ul>
+    </main>
+
+    <footer class="blue darken-4 page-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col l2 s12">
+              <h5 class="white-text"></h5>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          © 2021 CADCE
+          </div>
+        </div>
+      </footer>
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="js/zelda.js"></script>
+</body>
