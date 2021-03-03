@@ -1,0 +1,26 @@
+<%- include('partials/head.ejs') %>
+<%- include('partials/navbar.ejs') %>
+
+<main class="container">
+    <h1><%= titulo %></h1>
+    <form action="nuevo-producto" method="POST">
+        <h6>Nombre</h6>
+        <input type="text" name="nombre_producto">
+        <h6>Url de la imagen </h6>
+        <input type="text" name="imagen_producto">
+        <h6>Descripción</h6>
+        <input type="text" name="descripcion_producto">
+        <h6>Precio</h6>
+        <input type="text" name="precio_producto">
+        <br><br>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar producto
+            <i class="material-icons right">send</i>
+        </button>
+        <br><br><br>
+        
+    </form>
+</main>
+
+<%- include('partials/footer.ejs') %>
+
+
