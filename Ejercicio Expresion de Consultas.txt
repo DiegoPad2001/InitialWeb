@@ -1,0 +1,43 @@
+El ingreso total recibido por cada actor, sin importar en cuantas películas haya participado.
+
+SELECT actor.nombre, SUM(sueldo) as 'Ingreso Toltal'
+FROM Actor, Elenco, Pelicula
+WHERE Elenco.nombre=Actor.nombre and Elenco.titulo=Pelicula.titulo
+GROUP BY actor.nombre
+
+---------------------------------------------------------
+
+El monto total destinado a películas por cada Estudio Cinematográfico, durante la década de los 80's.
+
+SELECT nomestudio, SUM(presupuesto) as 'Monto destinado'
+FROM Pelicula
+WHERE año >80 and año<91
+GROUP BY nomestudio
+
+---------------------------------------------------------
+
+Nombre y sueldo promedio de los actores (sólo hombres) que reciben en promedio un pago superior a 5 millones de dolares por película.
+
+SELECT Actor.nombre, AVG(sueldo) as 'Sueldo Promedio'
+FROM Actor, Elenco
+WHERE Actor.nombre = Elenco.nombre
+AND sexo = 'H' 
+HAVING AVG(sueldo) > 5000000
+GROUP BY Actor.nombre
+
+-----------------------------------------------------------
+
+Título y año de producción de las películas con menor presupuesto. (Por ejemplo, la película de Titanic se ha producido en varias veces entre la lista de películas estaría la producción de Titanic y el año que fue filmada con menor presupuesto).
+
+SELECT nombre, año, presupuesto
+FROM Pelicula
+HAVING presupuesto<AVG(presupuesto)
+
+------------------------------------------------------------
+Mostrar el sueldo de la actriz mejor pagada.
+
+SELECT Nombre
+FROM Elenco
+WHERE sueldo=(SELECT Max(Sueldo) FROM Elenco WHERE Sexo= 'F')
+
+
