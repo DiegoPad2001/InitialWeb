@@ -7,6 +7,7 @@ exports.getLogin = (request, response, next) => {
     response.render('login', {
         titulo: 'Inicia sesión',
         error: request.session.error,
+        csrfToken: request.csrfToken(),
         isLoggedIn: request.session.isLoggedIn === true ? true : false
     });
 };
@@ -54,6 +55,7 @@ exports.getLogout = (request, response, next) => {
 exports.getRegister = (request, response, next) => {
     response.render('register', {
         titulo: 'Registra tus datos',
+        csrfToken: request.csrfToken(),
         isLoggedIn: request.session.isLoggedIn === true ? true : false
     });
 };

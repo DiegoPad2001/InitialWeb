@@ -3,6 +3,7 @@ const Producto = require('../models/producto');
 exports.getNuevoProducto = (request, response, next) => {
     response.render('nuevo-producto', {
         titulo: 'Nuevo Producto',
+        csrfToken: request.csrfToken(),
         isLoggedIn: request.session.isLoggedIn === true ? true : false
     });
 };

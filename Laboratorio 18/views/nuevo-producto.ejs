@@ -4,7 +4,7 @@
 <main class="container">
     <h1><%= titulo %></h1>
     <form action="nuevo-producto" method="POST">
-        
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
         <h6>Nombre</h6>
         <input type="text" name="nombre_producto">
         <h6>Url de la imagen </h6>
