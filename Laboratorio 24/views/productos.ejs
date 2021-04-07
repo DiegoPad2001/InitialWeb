@@ -1,0 +1,82 @@
+<%- include('partials/head.ejs') %>
+<%- include('partials/navbar.ejs') %>
+
+    <main class="container">
+        <h1><%= titulo %></h1>
+        <label for="buscar">Buscar</label>
+        <input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>">
+        <input type="text" name="buscar" id="buscar" onkeyup="buscar()">
+        <div class="row" id="resultados">
+            <% for (let producto of lista_productos) { %>
+                <div class="col s12 m4 l3">
+                  <div class="card small">
+                      <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="<%= producto.imagen %>">
+                      </div>
+                      <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"><%= producto.nombre %><i class="material-icons right">more_vert</i></span>
+                        <p><a href="#">...</a></p>
+                      </div>
+                      <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= producto.nombre %><i class="material-icons right">close</i></span>
+                        <p>Descripcion: <%= producto.descripcion %></p>
+                        <p>Precio: $<%= producto.precio %></p>
+                        
+                      </div>
+                    </div>
+                  </div>
+            <% } %>
+          </div>
+    </main>
+
+<%- include('partials/footer.ejs') %>
+
+
+<script>
+  function buscar() {
+    const valor_busqueda = document.getElementById('buscar').value;
+    //El token de protección CSRF
+    const csrf = document.getElementById('_csrf').value;
+
+    let data = {valor_busqueda: valor_busqueda};
+    console.log(valor_busqueda);
+    //función que manda la petición asíncrona
+    fetch('/productos/buscar', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'csrf-token': csrf,
+            'Content-Type': 'application/json'
+          },
+    }).then(result => {
+        return result.json(); //Regresa otra promesa
+    }).then(data => {
+        //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+        console.log(data);
+        let html = '';
+        for (let producto of data) {
+          html += '<div class="col s12 m4 l3">' + 
+                  '<div class="card small">' + 
+                      '<div class="card-image waves-effect waves-block waves-light">' +
+                        '<img class="activator" src="'+ producto.imagen +'">' +
+                      '</div>' +
+                      '<div class="card-content">' +
+                        '<span class="card-title activator grey-text text-darken-4">' + producto.nombre + '<i class="material-icons right">more_vert</i></span>' +
+                        '<p><a href="#">...</a></p>' +
+                      '</div>' +
+                      '<div class="card-reveal">' +
+                        '<span class="card-title grey-text text-darken-4">'+ producto.nombre +'<i class="material-icons right">close</i></span>' +
+                        '<p>Descripción: '+ producto.descripcion +'</p>' +
+                        '<p>Precion: $'+ producto.precio +'</p>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>';
+            
+        }
+        document.getElementById("resultados").innerHTML = html;
+
+    }).catch(err => {
+        console.error(err);
+    });
+  }
+</script>
