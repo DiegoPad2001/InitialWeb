@@ -7,6 +7,9 @@
 node_modules/
 dist/
 
+# Uploads folder
+uploads/*
+
 # Compiled Java class files
 *.class
 
@@ -47,3 +50,4 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+

@@ -1,0 +1,22 @@
+<%- include('partials/head.ejs') %>
+<%- include('partials/navbar.ejs') %>
+
+<main class="container">
+    <h2><%= titulo %></h2>
+    <% if (error) { %>
+       <span style="color:red"><%= error %></span>
+    <% } %>
+    <form action="/users/login" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+        <input type="text" name="usuario">
+        <input type="password" name="password">        
+        <br><br>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Ingresar
+            <i class="material-icons right">send</i>
+        </button>
+        <br><br><br>
+                
+    </form>
+</main>
+
+<%- include('partials/footer.ejs') %>
