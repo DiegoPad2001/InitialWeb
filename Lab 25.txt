@@ -1,0 +1,78 @@
+CREATE TABLE Clientes_Banca (
+NoCuenta varchar(5) NOT NULL,
+Nombre varchar(30) NULL,
+Saldo numeric(10,2) NULL,
+PRIMARY KEY (NoCuenta)   
+);
+
+CREATE TABLE Tipos_Movimiento (
+ClaveM varchar(2) NOT NULL,
+Descripcion varchar(30) NULL,
+PRIMARY KEY (ClaveM)
+);
+
+CREATE TABLE Movimientos (
+Fecha datetime NULL,
+Monto numeric(10,2) NULL,
+NoCuenta varchar(5) NOT NULL,
+ClaveM varchar(2) NOT NULL,
+PRIMARY KEY (NoCuenta, ClaveM, Fecha),
+FOREIGN KEY (NoCuenta) REFERENCES Clientes_Banca(NoCuenta),
+FOREIGN KEY (ClaveM) REFERENCES Tipos_Movimiento(ClaveM)
+
+);
+
+START TRANSACTION;
+INSERT INTO CLIENTES_BANCA VALUES('001', 'Manuel Rios Maldonado', 9000);
+INSERT INTO CLIENTES_BANCA VALUES('002', 'Pablo Perez Ortiz', 5000);
+INSERT INTO CLIENTES_BANCA VALUES('003', 'Luis Flores Alvarado', 8000);
+COMMIT;
+
+
+
+SELECT * FROM CLIENTES_BANCA
+
+/* ¿Que pasa cuando deseas realizar esta consulta?*/
+/* Muestra todos los valores que agregue */
+
+START TRANSACTION;
+INSERT INTO CLIENTES_BANCA VALUES('004','Ricardo Rios Maldonado',19000);
+INSERT INTO CLIENTES_BANCA VALUES('005','Pablo Ortiz Arana',15000);
+INSERT INTO CLIENTES_BANCA VALUES('006','Luis Manuel Alvarado',18000);
+
+SELECT * FROM CLIENTES_BANCA
+
+/* ¿Qué pasa cuando deseas realizar esta consulta? */
+/* No me aparecen los datos que inserte */
+
+START TRANSACTION;
+INSERT INTO TIPOS_MOVIMIENTO VALUES('A','Retiro Cajero Automatico');
+INSERT INTO TIPOS_MOVIMIENTO VALUES('B','Deposito Ventanilla');
+COMMIT;
+
+START TRANSACTION;
+INSERT INTO MOVIMIENTOS VALUES('001','A',GETDATE(),500);
+UPDATE CLIENTES_BANCA SET SALDO = SALDO -500
+WHERE NoCuenta='001'
+COMMIT;
+
+/* Posteriormente revisa si las tablas de clientes_banca y movimientos sufrieron algún cambio, es decir, si dio de alta el registro que se describe en la transacción y su actualización.
+ */
+/* Se actualizaron los datos*/
+
+
+
+/* ¿Para qué sirve el comando @@ERROR revisa la ayuda en línea?*/
+/* Para identificar la cantidad de errores que ecorrieon en la ejecucion*/
+
+/*¿Qué hace la transacción?*/
+/*Ejecutar un bloque de comandos*/
+
+/*¿Hubo alguna modificación en la tabla? Explica qué pasó y por qué.*/
+/*No porque ocurrio un error y se hizo un rollback sobre lo que si se habia ejecutado*/
+
+/*Una transacción que registre el retiro de una cajero. nombre del store procedure REGISTRAR_RETIRO_CAJERO que recibe 2 parámetros en NoCuenta y el monto a retirar.*/
+CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTRAR_RETIRO_CAJERO`(IN `uNoCuenta` VARCHAR(5), IN `uMonto` FLOAT(10)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN START TRANSACTION; UPDATE clientes_banca SET saldo = saldo - umonto WHERE NoCuenta=uNoCuenta; COMMIT; END
+
+/*Una transacción que registre el deposito en ventanilla. Nombre del store procedure REGISTRAR_DEPOSITO_VENTANILLA que recibe 2 parámetros en NoCuenta y el monto a depositar*/
+CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTRAR_DEPOSITO_VENTANILLA`(IN `uNoCuenta` VARCHAR(5), IN `uMonto` FLOAT(10)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN START TRANSACTION; UPDATE clientes_banca SET saldo = saldo + umonto WHERE NoCuenta=uNoCuenta; COMMIT; END
